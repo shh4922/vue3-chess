@@ -75,14 +75,14 @@ export default {
       this.blackKing = new King("black", { x: 1, y: 1 });
 
       const blackAry = [
-        new Queen("Queen", "black", { x: 1, y: 1 }),
-        new Rook("Rook", "black", { x: 1, y: 1 }),
-        new Rook("Rook", "black", { x: 1, y: 1 }),
-        new Knight("black", "black", { x: 1, y: 1 }),
-        new Knight("black", "black", { x: 1, y: 1 }),
-        new Bishop("black", "black", { x: 1, y: 1 }),
-        new Bishop("black", "black", { x: 1, y: 1 }),
-        new King("black", "black", { x: 1, y: 1 }),
+        new Rook("black", { x: 1, y: 1 }),
+        new Knight("black", { x: 1, y: 1 }),
+        new Queen("black", { x: 1, y: 1 }),
+        new Bishop("black", { x: 1, y: 1 }),
+        new King("black", { x: 1, y: 1 }),
+        new Bishop("black", { x: 1, y: 1 }),
+        new Knight("black", { x: 1, y: 1 }),
+        new Rook("black", { x: 1, y: 1 }),
       ];
 
       this.blockList[0] = blackAry;
@@ -90,14 +90,14 @@ export default {
 
     initWhiteData() {
       const whiteList = [
-        new Queen("Queen", "white", { x: 1, y: 1 }),
-        new Rook("Rook", "white", { x: 1, y: 1 }),
-        new Rook("Rook", "white", { x: 1, y: 1 }),
-        new Knight("white", "white", { x: 1, y: 1 }),
-        new Knight("white", "white", { x: 1, y: 1 }),
-        new Bishop("white", "white", { x: 1, y: 1 }),
-        new Bishop("white", "white", { x: 1, y: 1 }),
-        new King("white", "white", { x: 1, y: 1 }),
+        new Rook("white", { x: 1, y: 1 }),
+        new Knight("white", { x: 1, y: 1 }),
+        new Bishop("white", { x: 1, y: 1 }),
+        new King("white", { x: 1, y: 1 }),
+        new Queen("white", { x: 1, y: 1 }),
+        new Bishop("white", { x: 1, y: 1 }),
+        new Knight("white", { x: 1, y: 1 }),
+        new Rook("white", { x: 1, y: 1 }),
       ];
       this.blockList[7] = whiteList;
     },

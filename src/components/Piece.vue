@@ -1,5 +1,8 @@
 <template>
-  <h1 @click="goToMove">{{ piece.icon }}</h1>
+  <div>
+    <h1 @click="goToMove">{{ piece.icon }}</h1>
+    <p>{{ piece.team }}</p>
+  </div>
 </template>
 
 <style scoped></style>
