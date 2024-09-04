@@ -1,11 +1,12 @@
 <template>
   <div class="board">
-    <div v-for="(row, i) in blockList" :key="i" class="row">
+    <div v-for="(row, i) in board.blockList" :key="i" class="row">
       <Square
         v-for="(col, j) in row"
         :key="j"
         :color="(i + j) % 2 === 0 ? 'black' : 'white'"
         :piece="col"
+        @movePiece="movePiece"
       >
       </Square>
     </div>
@@ -24,12 +25,14 @@
 </style>
 
 <script>
-import Queen from "@/Pieces/Queen";
-import Rook from "../../Pieces/Rook";
-import King from "../../Pieces/King";
-import Bishop from "../../Pieces/Bishop";
-import Knight from "../../Pieces/Knight";
 import Square from "@/components/Board/Square.vue";
+
+import Board from "../../Objects/Board";
+/**
+ * 보드의 상태또한 관리할 수 있도록 만들어야함.
+ * 보드를 오브젝트로 만들고, 해당위치에 각각 기물을 넣어두고, 그 보드를 반환하여 보여주도록 함.
+ * 넘겨받은 보드 상태를 확인하고, 움직일시, 해당보드 오브젝트를 수정하면, Board컴포넌트는 자동으로 반영되게 됌.
+ */
 
 export default {
   name: "Board",
@@ -38,68 +41,17 @@ export default {
   },
   data() {
     return {
-      blockList: Array(8).fill(Array(8).fill(null)),
-
-      whiteQueen: null,
-      whiteRook1: null,
-      whiteRook2: null,
-      whiteKnigt1: null,
-      whiteKnigt2: null,
-      whiteBishop1: null,
-      whiteBishop2: null,
-      whiteKing: null,
-
-      blackRook1: null,
-      blackRook2: null,
-      blackKnigt1: null,
-      blackKnigt2: null,
-      blackBishop1: null,
-      blackBishop2: null,
-      blackKing: null,
-      blackQueen: null,
+      board: null,
     };
   },
   created() {
-    this.initBlackData();
-    this.initWhiteData();
+    this.board = new Board();
   },
   methods: {
-    initBlackData() {
-      this.blackQueen = new Queen("black", { x: 1, y: 1 });
-      this.blackRook1 = new Rook("black", { x: 1, y: 1 });
-      this.blackRook1 = new Rook("black", { x: 1, y: 1 });
-      this.blackKnigt2 = new Knight("black", { x: 1, y: 1 });
-      this.blackKnigt2 = new Knight("black", { x: 1, y: 1 });
-      this.blackBishop1 = new Bishop("black", { x: 1, y: 1 });
-      this.blackBishop1 = new Bishop("black", { x: 1, y: 1 });
-      this.blackKing = new King("black", { x: 1, y: 1 });
-
-      const blackAry = [
-        new Rook("black", { x: 1, y: 1 }),
-        new Knight("black", { x: 1, y: 1 }),
-        new Queen("black", { x: 1, y: 1 }),
-        new Bishop("black", { x: 1, y: 1 }),
-        new King("black", { x: 1, y: 1 }),
-        new Bishop("black", { x: 1, y: 1 }),
-        new Knight("black", { x: 1, y: 1 }),
-        new Rook("black", { x: 1, y: 1 }),
-      ];
-
-      this.blockList[0] = blackAry;
-    },
-
-    initWhiteData() {
-      const whiteList = [
-        new Rook("white", { x: 1, y: 1 }),
-        new Knight("white", { x: 1, y: 1 }),
-        new Bishop("white", { x: 1, y: 1 }),
-        new King("white", { x: 1, y: 1 }),
-        new Queen("white", { x: 1, y: 1 }),
-        new Bishop("white", { x: 1, y: 1 }),
-        new Knight("white", { x: 1, y: 1 }),
-        new Rook("white", { x: 1, y: 1 }),
-      ];
-      this.blockList[7] = whiteList;
+    movePiece(prevPosition, newPositionPiece) {
+      this.blockList[prevPosition.y][prevPosition.x] = null;
+      this.blockList[newPositionPiece.position.y][newPositionPiece.position.x] =
+        newPositionPiece;
     },
   },
 };

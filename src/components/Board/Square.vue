@@ -1,6 +1,6 @@
 <template>
   <div :class="`box ${color}`">
-    <Piece v-if="piece !== null" :piece="piece" />
+    <Piece v-if="piece !== null" :piece="piece" @movePiece="movePiece" />
   </div>
 </template>
 
@@ -34,10 +34,11 @@ export default {
   components: {
     Piece,
   },
-  created() {
-    if (this.piece !== null) {
-      console.log(this.piece);
-    }
+  created() {},
+  methods: {
+    movePiece(prevPosition, newPosition) {
+      this.$emit("movePiece", prevPosition, newPosition);
+    },
   },
 };
 </script>

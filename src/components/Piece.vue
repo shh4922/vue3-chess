@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 @click="goToMove">{{ piece.icon }}</h1>
+    <h1 @click="showPossiblePosition">{{ piece.icon }}</h1>
     <p>{{ piece.team }}</p>
   </div>
 </template>
@@ -19,10 +19,20 @@ export default {
   },
   created() {},
   methods: {
-    goToMove() {
-      console.log(this.piece.move());
-      console.log(`im ${this.piece.name} ${this.piece.team}`);
+    showPossiblePosition() {
+      console.log(this.piece);
     },
+
+    // goToMove() {
+    //   const newPositionPiece = {
+    //     ...this.piece,
+    //     position: {
+    //       x: 5,
+    //       y: 4,
+    //     },
+    //   };
+    //   this.$emit("movePiece", this.piece.position, newPositionPiece);
+    // },
   },
 };
 </script>
