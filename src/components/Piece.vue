@@ -20,7 +20,7 @@ export default {
   created() {},
   methods: {
     showPossiblePosition() {
-      console.log(this.piece);
+      console.log(this.piece.getPossiblePosition());
     },
 
     // goToMove() {

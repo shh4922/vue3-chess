@@ -10,7 +10,6 @@ class Board {
     blockList: Array<Array<Piece | null>>;
 
     constructor() {
-        // 8x8 체스판을 null로 초기화
         this.blockList = Array(8).fill(null).map(() => Array(8).fill(null));
         const blackAry = [
             new Rook("black", { x: 0, y: 0 }),
@@ -71,6 +70,13 @@ class Board {
         piece.position = newPosition;
     }
 
+    getPossiblePosition(position: Position, team: String): Position | null {
+        const { x, y } = position
+        if (this.blockList[y][x] === null || this.blockList[y][x]?.team !== team) {
+            return position
+        }
+        return null
+    }
 }
 
 export default Board

@@ -1,4 +1,5 @@
 import Piece from "./Piece"
+import Board from "@/Objects/Board"
 class King extends Piece {
     icon: string
 
@@ -8,12 +9,11 @@ class King extends Piece {
     }
 
     move(): void {
-        this.position = { x: 10, y: 29 }
-        console.log(this)
+
     }
 
-    getPossiblePosition(): Position[] {
-        const positions: Position[] = [];
+    getPossiblePosition(board: Board): Position[] {
+        const positions: Position[] = []
         const { x, y } = this.position;
 
         const moves = [
@@ -24,16 +24,26 @@ class King extends Piece {
         ];
 
         for (const move of moves) {
-            const newX = x + move.x
-            const newY = y + move.y
+            const isPossiblePosition: Position = {
+                x: x + move.x,
+                y: y + move.y
+            }
 
-            if (newX >= 0 && newX < 8 && newY >= 0 && newY < 8) {
-                positions.push({ x: newX, y: newY });
+            if (isPossiblePosition.x < 0 || isPossiblePosition.x >= 8 || isPossiblePosition.y < 0 || isPossiblePosition.y >= 8) {
+                break
+            }
+
+            const newPosition = board.getPossiblePosition(isPossiblePosition, this.team)
+
+            if (newPosition != null) {
+                positions.push(newPosition)
             }
         }
 
         return positions
     }
+
+
 
 
 }
