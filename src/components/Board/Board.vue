@@ -26,8 +26,10 @@
 
 <script>
 import Square from "@/components/Board/Square.vue";
-
 import Board from "../../Objects/Board";
+
+import { mapState, mapActions } from "vuex";
+
 /**
  * 보드의 상태또한 관리할 수 있도록 만들어야함.
  * 보드를 오브젝트로 만들고, 해당위치에 각각 기물을 넣어두고, 그 보드를 반환하여 보여주도록 함.
@@ -38,6 +40,9 @@ export default {
   name: "Board",
   components: {
     Square,
+  },
+  computed: {
+    ...mapState(["boaard"]),
   },
   data() {
     return {
