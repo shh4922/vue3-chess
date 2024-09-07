@@ -22,11 +22,13 @@ const store = createStore<State>({
         initializeBoard({ commit }, board: Board) {
             commit('setBoard', board);
         },
+
     },
     mutations: {
         setBoard(state, board: Board) {
             state.board = board; // Board 객체를 상태로 설정
         },
+
     },
 });
 

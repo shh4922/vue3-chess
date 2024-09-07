@@ -13,6 +13,7 @@ class King extends Piece {
     }
 
     getPossiblePosition(board: Board): Position[] {
+        console.log("!!")
         const positions: Position[] = []
         const { x, y } = this.position;
 
