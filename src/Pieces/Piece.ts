@@ -1,8 +1,4 @@
 
-// Board 의 위치는 배열인데, 이걸 어케 표현할까?
-// 기물이 움직일 수 잇는 거리가 있는데, 그곳에 기물이있는지는 어케 판단해야할까..?
-// 머리가 멍청한건지 감이안오군,.....
-
 class Piece {
     team: String
     position: Position
@@ -20,6 +16,9 @@ class Piece {
     move() {
         // movePosition
         console.log("Piece.js run move")
+    }
+    hi() {
+        console.log("부모임 ㅎㅇ")
     }
 }
 export default Piece

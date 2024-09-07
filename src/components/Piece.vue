@@ -31,20 +31,13 @@ export default {
     },
   },
   methods: {
+    /**
+     * 이동가능한 위치를 리턴후, 해당 위치를 board에서 깜빡이도록 설정하고싶음..
+     * 어케함 이거??....ㅇㅅㅇ;
+     */
     showPossiblePosition() {
       console.log(this.piece.getPossiblePosition(this.board));
     },
-
-    // goToMove() {
-    //   const newPositionPiece = {
-    //     ...this.piece,
-    //     position: {
-    //       x: 5,
-    //       y: 4,
-    //     },
-    //   };
-    //   this.$emit("movePiece", this.piece.position, newPositionPiece);
-    // },
   },
 };
 </script>
