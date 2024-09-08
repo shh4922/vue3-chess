@@ -36,7 +36,9 @@ export default {
      * 어케함 이거??....ㅇㅅㅇ;
      */
     showPossiblePosition() {
-      console.log(this.piece.getPossiblePosition(this.board));
+      const possiblePosition = this.piece.getPossiblePosition(this.board);
+      console.log(possiblePosition);
+      this.$store.commit("setPossiblePosition", possiblePosition);
     },
   },
 };

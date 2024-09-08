@@ -6,6 +6,7 @@
         :key="j"
         :color="(i + j) % 2 === 0 ? 'black' : 'white'"
         :piece="col"
+        :class="{ highlighted: isHighlighted(i, j) }"
         @movePiece="movePiece"
       >
       </Square>
@@ -22,6 +23,10 @@
 .row {
   display: flex;
 }
+.highlighted {
+  background-color: yellow; /* 깜빡이는 효과를 위해 강조 */
+  animation: blink 1s infinite;
+}
 </style>
 
 <script>
@@ -30,6 +35,7 @@ import Board from "../../Objects/Board";
 
 import { mapState, mapActions } from "vuex";
 mapActions;
+mapState;
 /**
  * 보드의 상태또한 관리할 수 있도록 만들어야함.
  * 보드를 오브젝트로 만들고, 해당위치에 각각 기물을 넣어두고, 그 보드를 반환하여 보여주도록 함.
@@ -42,7 +48,12 @@ export default {
     Square,
   },
   computed: {
-    ...mapState(["boaard"]),
+    // board() {
+    //   return this.$store.state.board;
+    // },
+    possiblePosition() {
+      return this.$store.state.possiblePosition;
+    },
   },
   data() {
     return {
@@ -54,6 +65,13 @@ export default {
     this.$store.commit("setBoard", this.board);
   },
   methods: {
+    isHighlighted(row, col) {
+      // 해당 좌표가 하이라이트할 위치에 있는지 확인
+      return this.possiblePosition.some(
+        (pos) => pos.x === col && pos.y === row
+      );
+    },
+
     movePiece(prevPosition, newPositionPiece) {
       this.blockList[prevPosition.y][prevPosition.x] = null;
       this.blockList[newPositionPiece.position.y][newPositionPiece.position.x] =

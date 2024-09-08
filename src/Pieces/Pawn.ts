@@ -3,44 +3,46 @@ import Piece from "./Piece"
 
 class Pawn extends Piece {
     icon: string
+    // 폰은 처음엔 두칸, 그뒤로는 한칸 움직일수있음
+    isMoved: boolean
 
     constructor(team: string, position: Position) {
         super(team, position)
         this.icon = team === 'black' ? '♟' : '♙'
+        this.isMoved = false
     }
 
     // 테스트용 더미,
-    private possiblePosition = [
-        { x: 1, y: 0 }, { x: -1, y: 0 }, // 좌우
-        { x: 0, y: 1 }, { x: 0, y: -1 }, // 상하
-        { x: 1, y: 1 }, { x: 1, y: -1 }, // 대각선
-        { x: -1, y: 1 }, { x: -1, y: -1 } // 대각선
-    ]
+    private possiblePosition = this.team === "white" ?
+        [
+            { x: 0, y: -1 } // 일반 이동 (한칸 앞으로 이동)
+        ] :
+        [
+            { x: 0, y: 1 }  // 일반 이동 (한칸 앞으로 이동)
+        ];
 
     getPossiblePosition(board: Board): Position[] {
         const positions: Position[] = []
         const { x, y } = this.position;
+        const direction = this.team === 'white' ? -1 : 1
 
+        // 처음 움직일때
+        if (!this.isMoved) {
+            const firstMove = { x: x, y: y + (2 * direction) }
+            const possiblePosition = board.getPossiblePosition(firstMove, this.team)
 
-
-        for (const move of this.possiblePosition) {
-            const isPossiblePosition: Position = {
-                x: x + move.x,
-                y: y + move.y
+            if (possiblePosition !== null) {
+                positions.push(possiblePosition)
+                this.isMoved = false
             }
 
-            if (isPossiblePosition.x < 0 || isPossiblePosition.x >= 8 || isPossiblePosition.y < 0 || isPossiblePosition.y >= 8) {
-                break
-            }
-
-            const newPosition = board.getPossiblePosition(isPossiblePosition, this.team)
-
-            if (newPosition != null) {
-                positions.push(newPosition)
-            }
+            return positions
         }
+
 
         return positions
     }
+
+
 }
 export default Pawn
