@@ -7,10 +7,14 @@ import Queen from "@/Pieces/Queen";
 import Rook from "@/Pieces/Rook";
 
 class Board {
-    blockList: Array<Array<Piece | null>>;
+
+    blockList: Array<Array<Piece | null>>; // Board 상태
+    role: string // 움직일수 있는 팀의 순서
 
     constructor() {
+        this.role = 'black'
         this.blockList = Array(8).fill(null).map(() => Array(8).fill(null));
+
         const blackAry = [
             new Rook("black", { x: 0, y: 0 }),
             new Knight("black", { x: 1, y: 0 }),
@@ -42,7 +46,7 @@ class Board {
             new Rook("white", { x: 7, y: 7 }),
         ];
         const whitePawnList = [
-            new Pawn("white", { x: 1, y: 6 }),
+            new Pawn("white", { x: 0, y: 6 }),
             new Pawn("white", { x: 1, y: 6 }),
             new Pawn("white", { x: 2, y: 6 }),
             new Pawn("white", { x: 3, y: 6 }),
@@ -58,22 +62,6 @@ class Board {
         this.blockList[7] = whiteList;
     }
 
-    /**
-     * 왜 만든건지 모르겠음
-     * @param piece 
-     * @param newPosition 
-     */
-    movePiece(piece: Piece, newPosition: Position) {
-        const { x: oldX, y: oldY } = piece.position;
-        const { x: newX, y: newY } = newPosition;
-
-        // 기존 위치를 비움
-        this.blockList[oldY][oldX] = null;
-
-        // 새 위치로 이동
-        this.blockList[newY][newX] = piece;
-        piece.position = newPosition;
-    }
 
 
     /**

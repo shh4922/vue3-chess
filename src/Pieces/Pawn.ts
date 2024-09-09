@@ -21,6 +21,7 @@ class Pawn extends Piece {
             { x: 0, y: 1 }  // 일반 이동 (한칸 앞으로 이동)
         ];
 
+
     getPossiblePosition(board: Board): Position[] {
         const positions: Position[] = []
         const { x, y } = this.position;

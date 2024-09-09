@@ -7,7 +7,6 @@
         :color="(i + j) % 2 === 0 ? 'black' : 'white'"
         :piece="col"
         :class="{ highlighted: isHighlighted(i, j) }"
-        @movePiece="movePiece"
       >
       </Square>
     </div>
@@ -32,7 +31,7 @@
 <script>
 import Square from "@/components/Board/Square.vue";
 import Board from "../../Objects/Board";
-
+import GameManager from "@/Objects/GameManager";
 import { mapState, mapActions } from "vuex";
 mapActions;
 mapState;
@@ -48,9 +47,6 @@ export default {
     Square,
   },
   computed: {
-    // board() {
-    //   return this.$store.state.board;
-    // },
     possiblePosition() {
       return this.$store.state.possiblePosition;
     },
@@ -58,24 +54,30 @@ export default {
   data() {
     return {
       board: null,
+      gameManager: null,
     };
   },
   created() {
-    this.board = new Board();
-    this.$store.commit("setBoard", this.board);
+    this.initGameManager();
+    this.initBoard();
   },
   methods: {
+    // 해당 좌표가 하이라이트할 위치에 있는지 확인
     isHighlighted(row, col) {
-      // 해당 좌표가 하이라이트할 위치에 있는지 확인
       return this.possiblePosition.some(
         (pos) => pos.x === col && pos.y === row
       );
     },
 
-    movePiece(prevPosition, newPositionPiece) {
-      this.blockList[prevPosition.y][prevPosition.x] = null;
-      this.blockList[newPositionPiece.position.y][newPositionPiece.position.x] =
-        newPositionPiece;
+    initBoard() {
+      this.board = new Board();
+      this.$store.commit("setBoard", this.board);
+    },
+
+    initGameManager() {
+      this.gameManager = new GameManager();
+
+      // this.$store.commit("setGameManager", this.gameManager);
     },
   },
 };

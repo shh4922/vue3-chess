@@ -29,6 +29,9 @@ export default {
     board() {
       return this.$store.state.board;
     },
+    currentTurn() {
+      return this.$store.state.gameManager.currentTurn;
+    },
   },
   methods: {
     /**
@@ -36,9 +39,21 @@ export default {
      * 어케함 이거??....ㅇㅅㅇ;
      */
     showPossiblePosition() {
+      if (!this.isMyTurn()) {
+        alert("니차례 아님 ㅋㅋ");
+      }
+
       const possiblePosition = this.piece.getPossiblePosition(this.board);
-      console.log(possiblePosition);
       this.$store.commit("setPossiblePosition", possiblePosition);
+    },
+
+    isMyTurn() {
+      console.log(this.currentTurn);
+      // console.log(this.piece.team);
+      // if (this.$store.state.gameManager.currentTurn === this.piece.team) {
+      return true;
+      // }
+      // return false;
     },
   },
 };

@@ -14,7 +14,7 @@ class Piece {
     }
 
     move() {
-        // movePosition
+
         console.log("Piece.js run move")
     }
     hi() {
