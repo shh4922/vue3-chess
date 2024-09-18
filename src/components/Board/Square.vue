@@ -1,6 +1,6 @@
 <template>
-  <div :class="`box ${color}`">
-    <Piece v-if="piece !== null" :piece="piece" @movePiece="movePiece" />
+  <div :class="`box ${color}`" @click="moveToPiece">
+    <Piece v-if="piece !== null" :piece="piece" />
   </div>
 </template>
 
@@ -26,9 +26,17 @@ export default {
       type: String,
       required: true,
     },
+    position: {
+      required: true,
+    },
     piece: {
       type: Piece,
       required: false,
+    },
+  },
+  computed: {
+    gameManager() {
+      return this.$store.state.gameManager;
     },
   },
   components: {
@@ -36,8 +44,11 @@ export default {
   },
   created() {},
   methods: {
-    movePiece(prevPosition, newPosition) {
-      this.$emit("movePiece", prevPosition, newPosition);
+    moveToPiece() {
+      if (this.gameManager.isClicked) {
+        // console.log("moveToPiece");
+        this.gameManager.movePiece(this.position);
+      }
     },
   },
 };

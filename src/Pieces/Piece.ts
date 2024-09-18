@@ -13,9 +13,8 @@ class Piece {
         this.position = position
     }
 
-    move() {
-
-        console.log("Piece.js run move")
+    move(position: Position) {
+        this.position = position
     }
     hi() {
         console.log("부모임 ㅎㅇ")

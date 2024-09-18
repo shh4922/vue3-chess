@@ -79,6 +79,13 @@ class Board {
         }
         return null
     }
+
+    /**
+     * 이동시, 기존기물의 위치를 새로운 위치로 옮기고 업데이트 해야함.
+     */
+    updateBoard() {
+
+    }
 }
 
 export default Board

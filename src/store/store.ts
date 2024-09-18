@@ -4,7 +4,7 @@ import { createStore } from 'vuex';
 
 interface State {
     board: Board | null;
-    gameManager: GameManager | null
+    gameManager: GameManager
     possiblePosition: Position[]
 }
 
@@ -14,13 +14,15 @@ const store = createStore<State>({
         return {
             board: null, // Board 타입을 명시적으로 지정
             possiblePosition: [],
-            gameManager: null
+            gameManager: new GameManager
         };
     },
     getters: {
         getBoard(state) {
             return state.board;
         },
+
+
     },
     actions: {
         initBoard({ commit }, board: Board) {
@@ -41,6 +43,7 @@ const store = createStore<State>({
         setPossiblePosition(state, position: Position[]) {
             state.possiblePosition = position
         },
+
     },
 });
 

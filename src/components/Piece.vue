@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 @click="showPossiblePosition">{{ piece.icon }}</h1>
+    <h1 @click.stop="showPossiblePosition">{{ piece.icon }}</h1>
     <p>{{ piece.team }}</p>
   </div>
 </template>
@@ -32,6 +32,9 @@ export default {
     currentTurn() {
       return this.$store.state.gameManager.currentTurn;
     },
+    gameManager() {
+      return this.$store.state.gameManager;
+    },
   },
   methods: {
     /**
@@ -41,19 +44,21 @@ export default {
     showPossiblePosition() {
       if (!this.isMyTurn()) {
         alert("니차례 아님 ㅋㅋ");
+        return;
       }
-
       const possiblePosition = this.piece.getPossiblePosition(this.board);
-      this.$store.commit("setPossiblePosition", possiblePosition);
+      if (possiblePosition !== null) {
+        console.log("showPossiblePosition");
+        this.$store.commit("setPossiblePosition", possiblePosition);
+        this.gameManager.selectPiece(this.piece);
+      }
     },
 
     isMyTurn() {
-      console.log(this.currentTurn);
-      // console.log(this.piece.team);
-      // if (this.$store.state.gameManager.currentTurn === this.piece.team) {
-      return true;
-      // }
-      // return false;
+      if (this.$store.state.gameManager.currentTurn === this.piece.team) {
+        return true;
+      }
+      return false;
     },
   },
 };

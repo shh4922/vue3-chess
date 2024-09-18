@@ -5,6 +5,7 @@
         v-for="(col, j) in row"
         :key="j"
         :color="(i + j) % 2 === 0 ? 'black' : 'white'"
+        :position="{ y: i, x: j }"
         :piece="col"
         :class="{ highlighted: isHighlighted(i, j) }"
       >
@@ -76,8 +77,7 @@ export default {
 
     initGameManager() {
       this.gameManager = new GameManager();
-
-      // this.$store.commit("setGameManager", this.gameManager);
+      this.$store.commit("setGameManager", this.gameManager);
     },
   },
 };
