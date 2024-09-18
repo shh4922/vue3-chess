@@ -6,6 +6,12 @@ import Piece from "@/Pieces/Piece";
 import Queen from "@/Pieces/Queen";
 import Rook from "@/Pieces/Rook";
 
+/**
+ * 1. 보드를 업데이트 하는 기능을 추가해야함.
+ * 2. 선택한 기물을 움직이는로직이 Board에 있어야 관리하기 편함.
+ * 3. 시발그냥 vue파일 하나에서 놀다가 class별로 관리하니까 로직이랑 화면그리는 로직이랑 어케관리할지 감이안옴
+ * 
+ */
 class Board {
 
     blockList: Array<Array<Piece | null>>; // Board 상태
