@@ -16,7 +16,11 @@ class Knight extends Piece {
         this.icon = team === 'black' ? '♞' : '♘'
     }
 
-
+    /**
+     * 이동가능한 포시션을 리턴
+     * @param board 현재 보드의 상태
+     * @returns 이동가능한 포지션을 배열에담아서 리턴함.
+     */
     getPossiblePosition(board: Board): Position[] {
         const positions: Position[] = []
         const { x, y } = this.position;

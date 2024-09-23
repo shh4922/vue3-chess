@@ -37,21 +37,18 @@ export default {
     },
   },
   methods: {
-    /**
-     * 이동가능한 위치를 리턴후, 해당 위치를 board에서 깜빡이도록 설정하고싶음..
-     * 어케함 이거??....ㅇㅅㅇ;
-     */
     showPossiblePosition() {
       if (!this.isMyTurn()) {
         alert("니차례 아님 ㅋㅋ");
         return;
       }
+
       const possiblePosition = this.piece.getPossiblePosition(this.board);
-      if (possiblePosition !== null) {
-        console.log("showPossiblePosition");
-        this.$store.commit("setPossiblePosition", possiblePosition);
-        this.gameManager.selectPiece(this.piece);
+      if (possiblePosition === null) {
+        return;
       }
+      this.$store.commit("showPossiblePosition", possiblePosition);
+      this.gameManager.selectPiece(this.piece);
     },
 
     isMyTurn() {
